@@ -18,12 +18,29 @@ class WalkingBird(Bird):
         print("walking")
 
 
+class Penguin(SwimmingBird):
+    def make_sound(self):
+        print("squawk")
+
+
+class Sparrow(FlyingBird):
+    def make_sound(self):
+        print("chirp")
+
+
 class Duck(FlyingBird, SwimmingBird, WalkingBird):
     def make_sound(self):
         print("quack")
 
 
 if __name__ == "__main__":
+    penguin = Penguin()
+    penguin.make_sound()  # Inherited from Bird
+    penguin.swim()        # Inherited from SwimmingBird
+    sparrow = Sparrow()
+    sparrow.make_sound()  # Inherited from Bird
+    sparrow.fly()         # Inherited from FlyingBird
+
     duck = Duck()
     duck.make_sound()  # Inherited from Bird
     duck.fly()         # Inherited from FlyingBird
