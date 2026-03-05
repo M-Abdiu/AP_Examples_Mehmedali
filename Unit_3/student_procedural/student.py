@@ -1,8 +1,8 @@
-def create_student(student_id: str, firstname: str, lastname: str):
+def create_student(student_id: str, fname: str, lname: str):
     return {
             "student_id": student_id,
-            "firstname": firstname, 
-            "lastname": lastname,
+            "firstname": fname, 
+            "lastname": lname,
             "modules": []
     }
 
