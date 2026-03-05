@@ -7,8 +7,8 @@ from person import Person
 @total_ordering
 class Student(Person):
     _counter = 0
-    
-    def __init__(self, student_id: str, firstname: str, lastname: str) -> None:
+
+    def __init__(self, firstname: str, lastname: str, student_id: str) -> None:
         super().__init__(firstname, lastname)
         self.student_id: str = student_id
         self._modules: list[Module] = []
@@ -25,9 +25,9 @@ class Student(Person):
     @property
     def student_id(self) -> str:
         return self._student_id
-    
+
     @student_id.setter
-    def student_id(self, value:str) -> None:
+    def student_id(self, value: str) -> None:
         if not value.isdigit():
             raise ValueError("student_id must contain only digits")
         self._student_id = value
@@ -43,15 +43,15 @@ class Student(Person):
             f"firstname={self.firstname!r}, "
             f"lastname={self.lastname!r})"
         )
-    
-    def __str__(self) -> str:
+
+    def __str__(self) -> str:  # overrides Person.__str__
         return f"{self.firstname} {self.lastname} ({self.student_id})"
-    
+
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Student):
             return NotImplemented
         return self.student_id == other.student_id
-    
+
     def __lt__(self, other: object) -> bool:
         if not isinstance(other, Student):
             return NotImplemented

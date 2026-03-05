@@ -5,7 +5,7 @@ from person import Person
 class Lecturer(Person):
     _counter = 0
 
-    def __init__(self, employee_id: str, firstname: str, lastname: str) -> None:
+    def __init__(self, firstname: str, lastname: str, employee_id: str) -> None:
         super().__init__(firstname, lastname)
         self.employee_id = employee_id
         self._modules: list[Module] = []
@@ -39,6 +39,6 @@ class Lecturer(Person):
             f"firstname={self.firstname!r}, "
             f"lastname={self.lastname!r})"
         )
-    
+
     def __str__(self) -> str:
-	    return f"{self.firstname} {self.lastname} ({self.employee_id})"
+        return f"{self.firstname} {self.lastname} ({self.employee_id})"
