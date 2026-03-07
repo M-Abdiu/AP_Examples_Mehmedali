@@ -1,21 +1,22 @@
 class Bird:
-    def make_sound(self):
+    def walk(self):
         print("Pep")
 
 
 class FlyingBird(Bird):
+    def walk(self):
+        print("hopping")
+
     def fly(self):
         print("flying")
 
 
 class SwimmingBird(Bird):
+    def walk(self):
+        print("waddeling")
+
     def swim(self):
         print("swimming")
-
-
-class WalkingBird(Bird):
-    def walk(self):
-        print("walking")
 
 
 class Penguin(SwimmingBird):
@@ -24,25 +25,23 @@ class Penguin(SwimmingBird):
 
 
 class Sparrow(FlyingBird):
-    def make_sound(self):
-        print("chirp")
+    pass
 
 
-class Duck(FlyingBird, SwimmingBird, WalkingBird):
-    def make_sound(self):
-        print("quack")
+class Duck(SwimmingBird, FlyingBird):
+    pass
 
 
 if __name__ == "__main__":
     penguin = Penguin()
-    penguin.make_sound()  # Inherited from Bird
+    penguin.walk()  # Inherited from Bird
     penguin.swim()        # Inherited from SwimmingBird
+
     sparrow = Sparrow()
-    sparrow.make_sound()  # Inherited from Bird
+    sparrow.walk()  # Inherited from Bird
     sparrow.fly()         # Inherited from FlyingBird
 
     duck = Duck()
-    duck.make_sound()  # Inherited from Bird
     duck.fly()         # Inherited from FlyingBird
     duck.swim()        # Inherited from SwimmingBird
-    duck.walk()        # Inherited from WalkingBird
+    duck.walk()        # Inherited from SwimmingBird due to MRO
