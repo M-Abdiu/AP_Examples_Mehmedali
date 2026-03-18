@@ -2,7 +2,6 @@ class Animal:
     registered_animals = []
 
     def __new__(cls, gender, *args, **kwargs):
-        # gender is now always explicitly provided
         for animal in Animal.registered_animals:
             if isinstance(animal, cls) and animal.gender == gender:
                 raise ValueError(f"An instance of {cls.__name__} with gender '{gender}' already exists.")

@@ -13,17 +13,18 @@ class Cat(Animal):
 class Ark:
     def __init__(self):
         # {(subclass, gender): instance}
-        self.animals = {}
+        self._animals = {}
 
-    def add_animal(self, animal):
+    def add_animal(self, animal: Animal):
         key = (type(animal), animal.gender)
-        if key in self.animals:
+        if key in self._animals:
             raise ValueError(f"{animal.__class__.__name__} with gender '{animal.gender}' already in the Ark.")
-        self.animals[key] = animal
+        self._animals[key] = animal
         print(f"Added to Ark: {animal.__class__.__name__}, gender: {animal.gender}")
 
-    def get_animals(self):
-        return list(self.animals.values())
+    def get_animal(self, animal_class: type, gender: str):
+        key = (animal_class, gender)
+        return self._animals.get(key, None)
 
 if __name__ == "__main__":
     ark = Ark()
