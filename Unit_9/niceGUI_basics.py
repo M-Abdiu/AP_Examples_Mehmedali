@@ -112,7 +112,7 @@ ui.separator()
 
 state = {
     'name': 'Alice',
-    'score': 63,
+    'score': 35,
     'show_warning': False,
 }
 
@@ -124,17 +124,19 @@ ui.label('Binding Demo').classes('text-h5 text-primary')
 ui.input(label='Enter your name').bind_value(state, 'name')
 # backward: How to convert the raw state value → into what the UI should display
 ui.label().bind_text_from(state, 'name', backward=lambda v: f'👋 Hello, {v}!')
-
 ui.separator()
 
 # --- Example B: Slider + live display ---
-# The slider writes to state['score'].
-# The label reads and formats it.
-ui.slider(min=0, max=100).bind_value(state, 'score')    # UI ↔ state
-ui.label().bind_text_from(state, 'score', backward=lambda v: f'Score: {int(v)} / 100') # state → UI
-ui.input(label='Score') \
-    .bind_value(state, 'score')  # now it's two-way UI ↔ state
-
+# The slider writes to state['score'] (two-way binding).
+# The label reads from state['score'] and formats it for display (one-way binding).
+# Precondition: state['score'] must always be a numeric value (int or float),
+# otherwise the backward formatter will raise an error.
+# v = the current value of state['score']
+ui.slider(min=0, max=100).bind_value(state, 'score')
+ui.label().bind_text_from(
+    state, 'score',
+    backward=lambda v: f'Score: {int(v)} / 100'
+)
 ui.separator()
 
 # --- Example C: Show/hide with bind_visibility_from ---
