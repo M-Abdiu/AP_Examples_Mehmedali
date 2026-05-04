@@ -26,7 +26,7 @@ ui.separator()  # draws a horizontal line between sections
 
 ui.button('Click Me', on_click=lambda: ui.notify('Button was clicked!'))
 ui.button('Download File', icon='download',
-          on_click=lambda: ui.download(b'Hello, world!', 'hello.txt'))
+          on_click=lambda: ui.download(b'Hello, world!', 'hello.txt'))  # b = bytes literal for file content
 
 ui.separator()
 
@@ -52,6 +52,7 @@ ui.separator()
 # switch   → looks like a mobile toggle
 # radio    → pick exactly one from a list
 # toggle   → button-style choice from a list
+# select   → dropdown list with single or multiple selection
 
 ui.checkbox('I agree to the terms')
 ui.switch('Enable notifications')
@@ -68,7 +69,7 @@ ui.separator()
 # select → dropdown to pick one option from a list
 
 ui.slider(min=0, max=100, value=40)
-ui.select(['Python', 'JavaScript', 'Rust'], label='Favorite Language', value='Python')
+ui.select(['Python', 'JavaScript', 'Rust'], label='Favorite Language', value='Python', multiple=True)
 
 ui.separator()
 
@@ -104,7 +105,7 @@ ui.separator()
 #
 # .bind_text_from(state, 'key', backward=fn)
 #   → A label READS from state, but can't write back (read-only).
-#     backward= is a function that formats the raw value for display.
+#     backward = is a function that formats the raw value for display.
 #
 # .bind_visibility_from(state, 'key')
 #   → Shows or hides an element based on a True/False state value.
@@ -112,7 +113,7 @@ ui.separator()
 
 state = {
     'name': 'Alice',
-    'score': 35,
+    'score': 37,
     'show_warning': False,
 }
 
@@ -121,6 +122,7 @@ ui.label('Binding Demo').classes('text-h5 text-primary')
 # --- Example A: Two-way binding ---
 # Both the input and the label below share state['name'].
 # Type in the box → the greeting updates live.
+# v = the current value of state['name']
 ui.input(label='Enter your name').bind_value(state, 'name')
 # backward: How to convert the raw state value → into what the UI should display
 ui.label().bind_text_from(state, 'name', backward=lambda v: f'👋 Hello, {v}!')
@@ -148,4 +150,4 @@ ui.label('⚠️  Warning: This is a serious alert!') \
     .bind_visibility_from(state, 'show_warning')
 
 
-ui.run()
+ui.run(reload=True)  # Start the app with auto-reload on code changes
