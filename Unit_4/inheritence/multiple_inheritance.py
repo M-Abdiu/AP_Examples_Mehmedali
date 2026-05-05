@@ -24,7 +24,7 @@ class Penguin(SwimmingBird):
         print("squawk")
 
 
-class Sparrow(FlyingBird):
+class Eagle(FlyingBird):
     pass
 
 
@@ -32,16 +32,22 @@ class Duck(SwimmingBird, FlyingBird):
     pass
 
 
+class Seagull(SwimmingBird, FlyingBird):
+    def walk(self):
+        # Explicitly call the walk method from FlyingBird
+        FlyingBird.walk(self)
+
+
 if __name__ == "__main__":
     penguin = Penguin()
-    penguin.walk()  # Inherited from Bird
-    penguin.swim()        # Inherited from SwimmingBird
+    penguin.walk()      # Inherited from Bird
+    penguin.swim()      # Inherited from SwimmingBird
 
-    sparrow = Sparrow()
-    sparrow.walk()  # Inherited from Bird
-    sparrow.fly()         # Inherited from FlyingBird
+    eagle = Eagle()
+    eagle.walk()        # Inherited from Bird
+    eagle.fly()         # Inherited from FlyingBird
 
     duck = Duck()
-    duck.fly()         # Inherited from FlyingBird
-    duck.swim()        # Inherited from SwimmingBird
-    duck.walk()        # Inherited from SwimmingBird due to MRO
+    duck.fly()          # Inherited from FlyingBird
+    duck.swim()         # Inherited from SwimmingBird
+    duck.walk()         # Inherited from SwimmingBird due to MRO

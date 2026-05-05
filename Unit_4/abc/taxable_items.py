@@ -52,7 +52,10 @@ class RegularProduct(TaxableItem):
     VAT_RATE = 0.081
 
     def calculate_vat(self) -> float:
-        return self.net_price * self.VAT_RATE
+        return (
+            self.net_price *
+            RegularProduct.VAT_RATE
+        )
 
 
 class ReducedProduct(TaxableItem):
@@ -62,10 +65,13 @@ class ReducedProduct(TaxableItem):
     VAT_RATE = 0.026
 
     def calculate_vat(self) -> float:
-        return self.net_price * self.VAT_RATE
+        return (
+            self.net_price *
+            ReducedProduct.VAT_RATE
+        )
 
 
-class TaxExemptProduct(TaxableItem):
+class TaxFreeProduct(TaxableItem):
     """
     Products that are exempt from VAT.
     """
